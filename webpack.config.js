@@ -26,6 +26,13 @@ Encore
         // pattern: /\.(png|jpg|jpeg)$/
     })
 
+    .enableVueLoader()
+
+    // For Symfony 5 :
+    // If you use single file components, then you can tell Encore to create a smaller and CSP-compliant build:
+    // .enableVueLoader(() => {}, { runtimeCompilerBuild: false })
+    // https://symfony.com/doc/5.1/frontend/encore/vuejs.html#runtime-compiler-build
+
     /*
      * ENTRY CONFIG
      *
