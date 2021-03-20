@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("email", message="Cet email est déjà utilisé.")
+ * @UniqueEntity("username", message="Ce pseudo est déjà utilisé.")
  */
 class User implements UserInterface
 {
@@ -21,7 +24,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Vous devez remplir ce champ.")
-     * @Assert\Length(max="180", maxMessage="Ce champ doit contenir au maximum {{ limit }} caractères.")
+     * @Assert\Length(max="180", maxMessage="Ce champ doit contenir {{ limit }} caractères maximum.")
      * @Assert\Email()
      */
     private $email;
@@ -32,8 +35,8 @@ class User implements UserInterface
      * @Assert\Length(
      *     min="2", 
      *     max="20",
-     *     minMessage="Ce champ doit contenir au moins {{ limit }} caractères.",
-     *     maxMessage="Ce champ doit contenir au maximum {{ limit }} caractères."
+     *     minMessage="Ce champ doit contenir {{ limit }} caractères minimum.",
+     *     maxMessage="Ce champ doit contenir {{ limit }} caractères maximum."
      * )
      */
     private $username;
@@ -47,7 +50,7 @@ class User implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Vous devez remplir ce champ.")
-     * @Assert\Length(min="7", minMessage="Ce champ doit contenir au moins 7 caractères.")
+     * @Assert\Length(min="7", minMessage="Ce champ doit contenir au moins {{ limit }} caractères.")
      */
     private $password;
 

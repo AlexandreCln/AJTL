@@ -62,6 +62,8 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Votré compté à bien été créé !');
+
             /* return $this->redirectToRoute('account'); */
 
             return $guardHandler->authenticateUserAndHandleSuccess(
