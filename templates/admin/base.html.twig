@@ -22,7 +22,7 @@
                     <i class="fas fa-2x fa-bars"></i>
                 </button>
 
-                <a href="" class="btn btn-primary-dark" id="menu-toggle">Déconnexion</a>
+                <a href="{{ path('app_logout') }}" class="btn btn-primary-dark" id="menu-toggle">Déconnexion</a>
             </nav>
 
             {{ include('common/_flash-messages.html.twig') }}
