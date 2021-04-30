@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\ChatApi;
+namespace App\Controller\Chat;
 
 use App\Entity\Conversation;
 use App\Repository\UserRepository;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\ChatApi;
+namespace App\Controller\Chat;
 
 use App\Entity\Message;
 use App\Entity\Conversation;
@@ -20,6 +20,13 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
  */
 class MessageController extends AbstractController
 {
+    // /**
+    //  * @Route("/publish-message", name="publish_message", methods={"POST"})
+    //  */
+    // public function publishMessage(): JsonResponse
+    // {
+    // }
+
     /**
      * @Route("/", name="create", methods={"POST"})
      */

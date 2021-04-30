@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Conversation
 {
+    // TODO: 'owner:read: group can be usefull for Chat API
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -26,7 +27,7 @@ class Conversation
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="conversation")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="conversations")
      * @ORM\JoinTable(name="conversations_users")
      * @Groups("conversation:list")
      */

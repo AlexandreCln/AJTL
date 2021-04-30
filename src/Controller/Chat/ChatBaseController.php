@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controller\ChatApi;
+namespace App\Controller\Chat;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class ChatApiController
+class ChatBaseController
 {
     /**
      * @var integer HTTP status code - 200 by default
@@ -115,20 +115,20 @@ class ChatApiController
     }
 
     // this method allows us to accept JSON payloads in POST requests 
-    protected function transformJsonBody(Request $request)
-    {
-        $data = json_decode($request->getContent(), true);
+    // protected function transformJsonBody(Request $request)
+    // {
+    //     $data = json_decode($request->getContent(), true);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return null;
-        }
+    //     if (json_last_error() !== JSON_ERROR_NONE) {
+    //         return null;
+    //     }
 
-        if ($data === null) {
-            return $request;
-        }
+    //     if ($data === null) {
+    //         return $request;
+    //     }
 
-        $request->request->replace($data);
+    //     $request->request->replace($data);
 
-        return $request;
-    }
+    //     return $request;
+    // }
 }
