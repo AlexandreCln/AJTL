@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PartnerRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(PartnerRepository $partnerRepository)
     {
-        return $this->render('home/index.html.twig');
+        return $this->render('home/index.html.twig', [
+            'partners' => $partnerRepository->findBy([], ['updatedAt' => 'DESC'], 3)
+        ]);
     }
 }

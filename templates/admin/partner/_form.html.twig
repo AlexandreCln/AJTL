@@ -1,0 +1,7 @@
+<div class="my-4">
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+    <input type="submit" value="{{ submitButtonText ?? 'Ajouter le partenaire' }}" class="btn btn-primary-dark" formnovalidate>
+    {{ form_end(form) }}
+</div>

@@ -1,0 +1,39 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des partenaires{% endblock %}
+
+{% block body %}
+    <div class="container text-primary-dark">
+        <h1 class="mt-5 mb-0 text-center text-lg-left">Nos partenaires</h1>
+
+        <hr class="mt-2 mb-5">
+
+        <a href="{{ path('partner_new') }}" class="btn btn-secondary">
+            <i class="fas fa-plus-circle"></i> Ajouter un partenaire
+        </a>
+
+        <div class="row mt-5 d-flex justify-content-center">
+            {% for partner in partners %}
+                <div class="col-md-4">
+                    <div class="admin-partner-index shadow p-3 mb-5 bg-white rounded">
+                        <h3 class="pl-5 pt-4 pb-3">{{ partner.name }}</h3>
+                        <a href="{{ path('partner_show', {'id': partner.id}) }}">
+                            <img src="{% if partner.filenamePartner is empty %}
+                                    {{ asset('build/logo-eureka.png') }}
+                            {% else %}
+                                    {{ vich_uploader_asset(partner, 'partnerFile') |
+                            imagine_filter('squared_thumbnail_medium') }}
+                                {% endif %}"
+                                 alt="{{ partner.filenamePartner }}" class="pb-4">
+                        </a>
+                        <p class="pl-3 pb-3 text-muted">
+                            <small>{{ partner.presentation|u.truncate(50, '...', false) }}</small>
+                        </p>
+                    </div>
+                </div>
+            {% else %}
+                <h2>Aucun partenaire à ce jour. <a href="{{ path('partner_new') }}">Ajoutez-en un !</a></h2>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
