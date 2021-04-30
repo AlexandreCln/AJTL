@@ -1,3 +1,4 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     default_locale: fr
     secret: '%env(APP_SECRET)%'
