@@ -14,6 +14,7 @@
     <body>
         {% block layout %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
+        {# TODO: put 'app' call inside 'javascripts' block using {{ parent() }} on pages, it allows to override it #}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
