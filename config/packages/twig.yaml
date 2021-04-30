@@ -8,6 +8,3 @@ twig:
 
     paths:
         '%kernel.project_dir%/assets/twig_css': css
-
-
-

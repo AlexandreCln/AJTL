@@ -1,17 +1,17 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.29.0",
-        "bootstrap": "^4.4.1",
+        "@symfony/webpack-encore": "^1.0.0",
+        "@vue/compiler-sfc": "^3.0.11",
+        "bootstrap": "^4.6",
         "core-js": "^3.0.0",
-        "eslint": "^7.21.0",
-        "eslint-plugin-vue": "^7.7.0",
-        "node-sass": "^4.14.0",
+        "eslint": "^7.25.0",
+        "eslint-plugin-vue": "^7.9.0",
+        "file-loader": "^6.0.0",
+        "hamburgers": "^1.1.3",
+        "node-sass": "^5.0.0",
         "popper.js": "^1.16.1",
-        "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^7.0.1",
-        "vue": "^2.6.12",
-        "vue-loader": "^15.0.11",
-        "vue-template-compiler": "^2.6.12",
+        "regenerator-runtime": "^0.13.7",
+        "sass-loader": "^11.0.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -23,8 +23,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.13.0",
-        "hamburgers": "^1.1.3",
-        "jquery": "^3.4.1"
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "jquery": "^3.6",
+        "vue": "^3.0.11",
+        "vue-loader": "^16.2.0",
+        "vue-template-compiler": "^2.6.12"
     }
 }
