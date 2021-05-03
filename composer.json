@@ -32,6 +32,7 @@
         "symfony/web-link": "5.2.*",
         "symfony/webpack-encore-bundle": "^1.11",
         "symfony/yaml": "5.2.*",
+        "symfonycasts/reset-password-bundle": "^1.7",
         "twig/cssinliner-extra": "^3.3",
         "twig/string-extra": "^3.3",
         "vich/uploader-bundle": "^1.17"
