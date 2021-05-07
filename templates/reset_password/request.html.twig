@@ -19,10 +19,10 @@
                 {% endfor %}
             </div>
 
-            {% form_theme requestForm 'form_themes/card_form_theme.html.twig' %}
+            {% form_theme registrationForm 'form_themes/card_form_theme.html.twig' %}
 
-            {{ form_start(requestForm) }}
-            {{ form_row(requestForm.email) }} {# A shortcut for calling form_row() on each field #}
+            {{ form_start(registrationForm) }}
+                {{ form_widget(registrationForm) }} {# A shortcut for calling form_row() on each field #}
 
             <div>
                 <small>
@@ -34,7 +34,7 @@
             <div class="mt-4 container-form-btn">
                 <button type="submit" class="form-btn">Envoyer la demande de changement</button>
             </div>
-            {{ form_end(requestForm) }}
+            {{ form_end(registrationForm) }}
         </div>
     </div>
 {% endblock %}
