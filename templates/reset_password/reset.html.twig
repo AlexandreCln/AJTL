@@ -13,16 +13,17 @@
             <span class="title">
                 Changez de mot de passe !
             </span>
-
-                {% form_theme resetForm 'form_themes/card_form_theme.html.twig' %}
-
-                {{ form_start(resetForm) }}
-                {{ form_row(resetForm.plainPassword) }}
-                <div class="mt-4 container-form-btn">
-                    <button type="submit" class="form-btn">Envoyer la modification</button>
-                </div>
-                {{ form_end(resetForm) }}
             </div>
+
+            {% form_theme registrationForm 'form_themes/card_form_theme.html.twig' %}
+
+            {{ form_start(registrationForm) }}
+                {{ form_widget(registrationForm) }}
+
+            <div class="mt-4 container-form-btn">
+                <button type="submit" class="form-btn">Modifier</button>
+            </div>
+            {{ form_end(registrationForm) }}
         </div>
     </div>
 {% endblock %}
