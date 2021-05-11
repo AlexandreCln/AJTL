@@ -8,7 +8,7 @@ const $ = require('jquery');
 require('bootstrap');
 
 // Custom JavaScript
-import * as customFileInput from './common/custom-file_input.js';
+import * as customFileInput from './modules/custom-file-input.js';
 customFileInput.updateInputFileName();
 import * as dashboard from './pages/admin/dashboard.js';
 dashboard.toggleMenu();
