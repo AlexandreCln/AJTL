@@ -23,7 +23,7 @@ class PresentationController extends AbstractController
     public function index(PresentationRepository $presentationnRepo)
     {
         return $this->render('presentation/index.html.twig', [
-            'presentation' => $presentationnRepo->findUniqueRow(),
+            'presentation' => $presentationnRepo->findUniqueEntity(),
         ]);
     }
 
@@ -33,7 +33,7 @@ class PresentationController extends AbstractController
     public function adminIndex(Request $request, PresentationRepository $presentationRepo, EntityManagerInterface $em)
     {
         // Get the unique row of Presentation table
-        $presentation = $presentationRepo->findUniqueRow();
+        $presentation = $presentationRepo->findUniqueEntity();
         // or create a new
         if (!$presentation instanceof Presentation) {
             $presentation =  new Presentation();
@@ -78,7 +78,7 @@ class PresentationController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($presentationPerson);
-            $presentationRepo->findUniqueRow()->addPresentationPerson($presentationPerson);
+            $presentationRepo->findUniqueEntity()->addPresentationPerson($presentationPerson);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_presentation');
@@ -124,7 +124,7 @@ class PresentationController extends AbstractController
     public function deletePresentationPerson(Request $request, PresentationPerson $presentationPerson, PresentationRepository $presentationRepo): Response
     {
         if ($this->isCsrfTokenValid('delete' . $presentationPerson->getId(), $request->request->get('_token'))) {
-            $presentationRepo->findUniqueRow()->removePresentationPerson($presentationPerson);
+            $presentationRepo->findUniqueEntity()->removePresentationPerson($presentationPerson);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($presentationPerson);

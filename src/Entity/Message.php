@@ -37,7 +37,7 @@ class Message
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages", cascade={"persist"})
      * @Groups("conversation:read")
      */
     private $user;

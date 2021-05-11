@@ -17,6 +17,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    // TODO: it is simpler to create OneToOne::Contact relation ? or use `contact` group for specific cases ?
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -42,7 +44,11 @@ class User implements UserInterface
      *     minMessage="Ce champ doit contenir {{ limit }} caractères minimum.",
      *     maxMessage="Ce champ doit contenir {{ limit }} caractères maximum."
      * )
-     * @Groups({"conversation:read", "conversation:list"})
+     * @Groups({
+     *     "conversation:read",
+     *     "conversation:list",
+     *     "contact",
+     * })
      */
     private $username;
 
