@@ -1,19 +1,17 @@
-//  Theme 1
-//$primary: #8db8c1;
-//$primary-dark: #034C5F;
-//$secondary: darken(#F9C4BA, 4%);
-//$background: #fcf1f0;
+$primary: #0085b5;
+$primary-dark: #1D5E98;
+$secondary: #f9f871;
+$background: #FCFAFC;
 
-//  Theme 2
-$primary: #8fc6ed;
-$primary-dark: #2d6790;
-$secondary: #fdf181;
-$background: #fcfaf6;
+$borderLight: #d8d8d8;
 
-//  Usable pallet
-$usable1: #9e4c4c;
+// $primary: #1D5E98;
+// $secondary: #F2E750;
+// $accent: #D94862;
+// $neutral-light: #FCFAFC;
+// $neutral-dark: #21293A;
 
-//  Bootstrap theme overwrite
+//  Bootstrap custom classes
 $theme-colors: (
     "primary": $primary,
     "primary-dark": $primary-dark,

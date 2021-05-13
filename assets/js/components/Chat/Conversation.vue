@@ -1,5 +1,12 @@
 <template>
-  <div class="chat-box">
+  <div class="conversation">
+    <Header class="header">
+      <SvgIcon
+        class="back"
+        icon="left-arrow"
+        @click="$emit('switchTab', 'UserList')"
+      />
+    </Header>
     <div class="messages-area">
       <Message
         v-for="message in messages"
@@ -11,10 +18,14 @@
       <div class="input-area">
         <textarea
           v-model="inputValue"
-          placeholder="Écrivez ici ..."
+          placeholder="Message ..."
           @keydown.enter.prevent="sendMessage"
         />
-        <SendIcon @click="sendMessage" />
+        <SvgIcon
+          class="send"
+          icon="send"
+          @click="sendMessage"
+        />
       </div>
     </form>
   </div>
@@ -22,11 +33,11 @@
 
 <script>
 import Message from '@/components/Chat/Message';
-import SendIcon from '@/components/Chat/SendIcon';
+import SvgIcon from '@/components/common/SvgIcon';
 
 export default {
   name: 'Conversation',
-  components: { Message, SendIcon },
+  components: { Message, SvgIcon },
   props: { 
     user: {
       type: Object,
@@ -56,29 +67,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$conversationBg: rgb(253, 253, 146);
+@import 'Styles/helpers/_colors.scss';
+$headerHeight: 42px;
 
-.chat-box {
+.conversation {
   display: grid;
-  align-items: end;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: $headerHeight 1fr auto;
   height: 100%;
   width: 100%;
-  background-color: $conversationBg;
+  background-color: white;
+  .header {
+    height: $headerHeight;
+  }
   .input-area {
     display: grid;
     grid-template-columns: 85% 1fr;
+    background-color: $primary;
+    border-top: 1px solid $borderLight;
+    cursor: pointer;
     textarea {
-      height: 36px;
+      height: 60px;
       max-height: 155px;
-      height: 36px;
       font-size: 14px;
-      border: 1px solid #cccccc;
-      padding: 5px;
+      border: none;
+      padding: 9px;
     }
-    svg {
-      align-self: center;
-      margin: 7px;
+    .send {
+      margin: auto;
+      color: white;
     }
   }
 }
