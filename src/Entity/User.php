@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Chat\Message;
+use App\Service\UploaderHelper;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Entity\Chat\Conversation;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -23,9 +26,22 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"conversation:read", "conversation:list"})
+     * @Groups({"conversation:read", "contact:read", "conversation:list"})
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Vous devez remplir ce champ.")
+     * @Assert\Length(min="7", minMessage="Ce champ doit contenir au moins {{ limit }} caractères.")
+     */
+    private $password;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -47,31 +63,24 @@ class User implements UserInterface
      * @Groups({
      *     "conversation:read",
      *     "conversation:list",
-     *     "contact",
+     *     "contact:read",
      * })
      */
     private $username;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"contact:read"})
      */
-    private $roles = [];
+    private $avatarFilename;
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Vous devez remplir ce champ.")
-     * @Assert\Length(min="7", minMessage="Ce champ doit contenir au moins {{ limit }} caractères.")
-     */
-    private $password;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Conversation", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Chat\Conversation", mappedBy="users")
      */
     private $conversations;
 
     /**
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Chat\Message", mappedBy="user")
      */
     private $messages;
 
@@ -104,35 +113,6 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     /**
      * @see UserInterface
      */
@@ -163,6 +143,57 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getOriginalAvatarFilename(): ?string
+    {
+        return $this->avatarFilename;
+    }
+
+    /**
+     * This isn't full path, just the part relative from wherever our app decides to store uploads.
+     */
+    public function getAvatarFilename(): ?string
+    {
+        if (!$this->avatarFilename) return null;
+
+        return UploaderHelper::USER_AVATAR . '/' . $this->getOriginalAvatarFilename();
+    }
+
+    public function setAvatarFilename(string $avatarFilename): self
+    {
+        $this->avatarFilename = $avatarFilename;
 
         return $this;
     }

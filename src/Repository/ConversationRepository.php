@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Conversation;
+use App\Entity\Chat\Conversation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

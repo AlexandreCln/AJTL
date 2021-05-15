@@ -1,5 +1,5 @@
 <template>
-  <div class="user-list">
+  <div class="contact-list">
     <Header class="header">
       <svg-icon
         class="minimize"
@@ -8,31 +8,33 @@
       />
     </Header>
     <div class="list">
-      <UserItem
-        v-for="user in users"
-        :key="user.id"
-        :user="user"
-        @click="$emit('switchTab', 'Conversation', user)"
+      <ContactItem
+        v-for="contact in contacts"
+        :key="contact.id"
+        :contact="contact"
+        @click="$emit('switchTab', 'Conversation')"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import chatApi from '@/composables/chatApi.js';
 import SvgIcon from '@/components/common/SvgIcon'
 import Header from '@/components/Chat/Header'
-import UserItem from '@/components/Chat/UserItem';
-import chatApi from '@/composables/chatApi.js';
+import ContactItem from '@/components/Chat/ContactItem';
 
 export default {
-  name: 'UserList',
-  components: { Header, SvgIcon, UserItem },
+  name: 'ContactList',
+  components: { Header, SvgIcon, ContactItem },
   setup () {
-    const users = chatApi.getUserList()
+    const contacts = ref({});
+    
+    chatApi.fetchContacts()
+      .then(res => contacts.value = res);
 
-    return {
-      users : users
-    }
+    return { contacts }
   },
 }
 </script>
@@ -41,7 +43,7 @@ export default {
 $listBgColor: linen;
 $headerHeight: 42px;
 
-.user-list {
+.contact-list {
   .header {
     height: $headerHeight;
     .minimize {
@@ -51,7 +53,7 @@ $headerHeight: 42px;
   .list {
     height: calc(100% - #{$headerHeight});
     overflow-x: hidden;
-    overflow-y: scroll;   
+    overflow-y: auto;   
     background-color: $listBgColor;
   }
 }

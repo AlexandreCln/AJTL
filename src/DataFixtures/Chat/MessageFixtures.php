@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures\Chat;
 
-use App\Entity\Message;
+use App\Entity\Chat\Message;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\HttpClient\HttpClient;

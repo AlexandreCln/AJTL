@@ -4,7 +4,7 @@
       <SvgIcon
         class="back"
         icon="left-arrow"
-        @click="$emit('switchTab', 'UserList')"
+        @click="$emit('switchTab', 'ContactList')"
       />
     </Header>
     <div class="messages-area">

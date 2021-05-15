@@ -61,18 +61,17 @@ class PresentationPerson
         return $this;
     }
 
-    public function getPictureFilename(): ?string
-    {
-        if ($this->pictureFilename) {
-            return UploaderHelper::PRESENTATION_PERSON_PICTURE . '/' . $this->pictureFilename;
-        }
-
-        return null;
-    }
-
     public function getOriginalPictureFilename(): ?string
     {
         return $this->pictureFilename;
+    }
+
+    /**
+     * This isn't full path, just the part relative from wherever our app decides to store uploads.
+     */
+    public function getPictureFilename(): string
+    {
+        return UploaderHelper::PRESENTATION_PERSON_PICTURE . '/' . $this->getOriginalPictureFilename();
     }
 
     public function setPictureFilename(string $pictureFilename): self

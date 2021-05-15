@@ -32,7 +32,9 @@ class AppExtension extends AbstractExtension implements ServiceSubscriberInterfa
     }
 
     /**
-     * Lits here needed services, these are then included in the container.
+     * Use the service subscriber of ServiceSubscriberInterface for performances purposes.
+     * Lits needed services to included these in the container, 
+     * then call $this->container->get() to instantiate them.
      */
     public static function getSubscribedServices()
     {

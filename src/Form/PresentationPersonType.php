@@ -15,14 +15,8 @@ class PresentationPersonType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-        /** @var PresentationPerson|null $presentationPerson */
         $presentationPerson = $options['data'] ?? null;
         $isEdit = $presentationPerson && $presentationPerson->getId();
-
-        $builder
-            ->add('name', TextType::class, ['label' => 'Nom'])
-            ->add('job', TextType::class, ['label' => 'Fonction']);
 
         $pictureConstraints = [
             new Image([
@@ -39,6 +33,8 @@ class PresentationPersonType extends AbstractType
         }
 
         $builder
+            ->add('name', TextType::class, ['label' => 'Nom'])
+            ->add('job', TextType::class, ['label' => 'Fonction'])
             ->add('pictureFile', FileType::class, [
                 'label' => 'Photo',
                 'mapped' => false,

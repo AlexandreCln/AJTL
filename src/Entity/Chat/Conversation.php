@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Chat;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ConversationRepository;
 use Doctrine\Common\Collections\Collection;
+use App\Repository\Chat\ConversationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -27,7 +28,7 @@ class Conversation
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="conversations")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="conversations")
      * @ORM\JoinTable(name="conversations_users")
      * @Groups("conversation:list")
      */

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Chat;
 
+use App\Entity\User;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\MessageRepository;
+use App\Repository\Chat\MessageRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -37,7 +38,7 @@ class Message
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="messages", cascade={"persist"})
      * @Groups("conversation:read")
      */
     private $user;

@@ -2,10 +2,10 @@
 
 namespace App\Controller\Chat;
 
-use App\Entity\Message;
-use App\Entity\Conversation;
+use App\Entity\Chat\Message;
+use App\Entity\Chat\Conversation;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ConversationRepository;
+use App\Repository\Chat\ConversationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 /**
- * @Route("/api/messages", name="api_messages_")
+ * @Route("/api/chat/messages", name="api_messages_")
  */
 class MessageController extends AbstractController
 {
@@ -40,7 +40,7 @@ class MessageController extends AbstractController
         // public function configureOptions(OptionsResolver $resolver)
         // {
         //     $resolver->setDefaults([
-        //         'data_class' => 'App\Entity\Message',
+        //         'data_class' => 'App\Entity\Chat\Message',
         //         'csrf_protection'   => false
         //     ]);
         //     return;

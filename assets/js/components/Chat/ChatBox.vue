@@ -4,12 +4,11 @@
     class="chat-container"
   >
     <SvgSprite />
-   
+  
     <keep-alive>
       <component
         :is="currentTab"
         class="current-tab"
-        :user="user"
         @switchTab="switchTab"
         @toggleChat="toggleChat"
       />
@@ -28,27 +27,24 @@
 <script>
 import SvgSprite from '@/components/common/SvgSprite'
 import SvgIcon from '@/components/common/SvgIcon'
-import UserList from "@/components/Chat/UserList";
+import ContactList from "@/components/Chat/ContactList";
 import Conversation  from "@/components/Chat/Conversation";
 
 export default {
   name: 'ChatBox',
-  components: { SvgSprite, SvgIcon, UserList, Conversation },
+  components: { SvgSprite, SvgIcon, ContactList, Conversation },
   data() {
     return {
       isOpen: true,
-      currentTab: 'UserList',
-
-      user: null,
+      currentTab: 'ContactList',
     };
   },
   methods: {
     toggleChat() { 
       this.isOpen = !this.isOpen 
     },
-    switchTab(tab, user) {
+    switchTab(tab) {
       this.currentTab = tab
-      this.user = user
     }
   }
 }
@@ -56,6 +52,7 @@ export default {
 
 <style lang="scss">
 @import "Styles/helpers/_colors.scss";
+// TODO: https://fonts.google.com/specimen/Grand+Hotel?preview.text_type=custom#standard-styles
 
 .chat-container {
   position: fixed;

@@ -2,10 +2,10 @@
 
 namespace App\Controller\Chat;
 
-use App\Entity\Conversation;
+use App\Entity\Chat\Conversation;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\ConversationRepository;
+use App\Repository\Chat\ConversationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 /**
- * @Route("/api/conversations", name="api_conversations_")
+ * @Route("/api/chat/conversations", name="api_conversations_")
  */
 class ConversationController extends AbstractController
 {

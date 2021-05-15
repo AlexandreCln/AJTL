@@ -17,29 +17,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PresentationController extends AbstractController
 {
+    // TODO: move admin part in separate controller ?
     /**
      * @Route("/presentation", name="presentation")
      */
     public function index(PresentationRepository $presentationnRepo)
     {
         return $this->render('presentation/index.html.twig', [
-            'presentation' => $presentationnRepo->findUniqueEntity(),
+            'presentation' => $presentationnRepo->getUniqueEntity(),
         ]);
     }
 
     /**
      * @Route("/admin/presentation", name="admin_presentation")
      */
-    public function adminIndex(Request $request, PresentationRepository $presentationRepo, EntityManagerInterface $em)
+    public function adminIndex(Request $request, PresentationRepository $presentationRepo, EntityManagerInterface $em): Response
     {
-        // Get the unique row of Presentation table
-        $presentation = $presentationRepo->findUniqueEntity();
-        // or create a new
-        if (!$presentation instanceof Presentation) {
-            $presentation =  new Presentation();
-            $em->persist($presentation);
-            $em->flush();
-        }
+        $presentation = $presentationRepo->getUniqueEntity();
 
         $form = $this->createForm(PresentationType::class, $presentation);
         $form->handleRequest($request);
@@ -53,14 +47,14 @@ class PresentationController extends AbstractController
 
         return $this->render('admin/presentation/index.html.twig', [
             'form' => $form->createView(),
-            'presentationPersons' => $presentation->getPresentationPersons()
+            'presentation' => $presentation
         ]);
     }
 
     /**
      * @Route("/admin/presentation/ajout-membre-presentation", name="admin_new_presentation_person", methods={"GET","POST"})
      */
-    public function newPresentationPerson(Request $request, PresentationRepository $presentationRepo, UploaderHelper $uploaderHelper): Response
+    public function newPresentationPerson(Request $request, PresentationRepository $presentationRepo, UploaderHelper $uploader): Response
     {
         $presentationPerson = new PresentationPerson();
         $form = $this->createForm(PresentationPersonType::class, $presentationPerson);
@@ -72,14 +66,14 @@ class PresentationController extends AbstractController
             $uploadedFile = $form['pictureFile']->getData();
 
             if ($uploadedFile) {
-                $newFilename = $uploaderHelper->uploadPresentationPersonPicture($uploadedFile);
+                $newFilename = $uploader->upload($uploadedFile, UploaderHelper::PRESENTATION_PERSON_PICTURE);
                 $presentationPerson->setPictureFilename($newFilename);
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($presentationPerson);
-            $presentationRepo->findUniqueEntity()->addPresentationPerson($presentationPerson);
-            $entityManager->flush();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($presentationPerson);
+            $presentationRepo->getUniqueEntity()->addPresentationPerson($presentationPerson);
+            $manager->flush();
 
             return $this->redirectToRoute('admin_presentation');
         }
@@ -92,7 +86,7 @@ class PresentationController extends AbstractController
     /**
      * @Route("/admin/presentation/editer-membre-presentation/{id}", name="admin_edit_presentation_person", methods={"GET","POST"})
      */
-    public function editPresentationPerson(Request $request, PresentationPerson $presentationPerson, UploaderHelper $uploaderHelper): Response
+    public function editPresentationPerson(Request $request, PresentationPerson $presentationPerson, UploaderHelper $uploader): Response
     {
         $form = $this->createForm(PresentationPersonType::class, $presentationPerson);
         $form->handleRequest($request);
@@ -103,7 +97,7 @@ class PresentationController extends AbstractController
             $uploadedFile = $form['pictureFile']->getData();
 
             if ($uploadedFile) {
-                $newFilename = $uploaderHelper->uploadPresentationPersonPicture($uploadedFile);
+                $newFilename = $uploader->upload($uploadedFile, UploaderHelper::PRESENTATION_PERSON_PICTURE);
                 $presentationPerson->setPictureFilename($newFilename);
             }
 
@@ -124,11 +118,11 @@ class PresentationController extends AbstractController
     public function deletePresentationPerson(Request $request, PresentationPerson $presentationPerson, PresentationRepository $presentationRepo): Response
     {
         if ($this->isCsrfTokenValid('delete' . $presentationPerson->getId(), $request->request->get('_token'))) {
-            $presentationRepo->findUniqueEntity()->removePresentationPerson($presentationPerson);
+            $presentationRepo->getUniqueEntity()->removePresentationPerson($presentationPerson);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($presentationPerson);
-            $entityManager->flush();
+            $manager = $this->getDoctrine()->getManager();
+            $manager->remove($presentationPerson);
+            $manager->flush();
         }
 
         return $this->redirectToRoute('admin_presentation');

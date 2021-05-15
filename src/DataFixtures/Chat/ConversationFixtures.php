@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures\Chat;
 
-use App\Entity\Conversation;
+use App\Entity\Chat\Conversation;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\Chat\ContactFixtures;
 use App\DataFixtures\Chat\MessageFixtures;

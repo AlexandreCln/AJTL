@@ -1,21 +1,21 @@
 <template>
-  <div class="user-item">
-    <Avatar :photo-src="user.photoSrc" />
+  <div class="contact-item">
+    <Avatar :photo-src="contact.avatarFilename" />
     <div class="info">
-      <strong>{{ user.name }}</strong>
-      <span v-if="user.online">En ligne</span>
-      <span v-else>Hors ligne</span>
+      <strong>{{ contact.username }}</strong>
+      <!-- <span v-if="contact.online">En ligne</span> -->
+      <!-- <span v-else>Hors ligne</span> -->
     </div>
     <svg
       height="10"
       width="27"
     >
-      <circle
+      <!-- <circle
         cx="5"
         cy="5"
         r="5"
-        :fill="user.online ? 'mediumseagreen' : 'gray'"
-      />
+        :fill="contact.online ? 'mediumseagreen' : 'gray'"
+      /> -->
     </svg>
   </div>
 </template>
@@ -24,15 +24,15 @@
 import Avatar from '@/components/Chat/Avatar'
 
 export default {
-  name: 'UserItem',
+  name: 'ContactItem',
   components: { Avatar },
   props: {
-    user: {
+    contact: {
       type: Object,
       required: true
     }
   },
-  setup (props) { // props is reactive
+  setup (props) { // props est reactive, mais si on destructure les valeurs ne le sont plus (doit utiliser toRefs() )
     return {  }
   }
 }
@@ -42,7 +42,7 @@ export default {
 $itemHeight: 50px;
 $itemBgColor: aliceblue;
 
-.user-item {
+.contact-item {
   display: flex;
   align-items: center;
   background-color: $itemBgColor;

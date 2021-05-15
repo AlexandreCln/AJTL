@@ -114,21 +114,21 @@ class ChatBaseController
         return $this->setStatusCode(Response::HTTP_CREATED)->respond($data);
     }
 
-    // this method allows us to accept JSON payloads in POST requests 
-    // protected function transformJsonBody(Request $request)
-    // {
-    //     $data = json_decode($request->getContent(), true);
+    // Allow to accept JSON payloads in POST requests 
+    protected function transformJsonBody(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
 
-    //     if (json_last_error() !== JSON_ERROR_NONE) {
-    //         return null;
-    //     }
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
 
-    //     if ($data === null) {
-    //         return $request;
-    //     }
+        if ($data === null) {
+            return $request;
+        }
 
-    //     $request->request->replace($data);
+        $request->request->replace($data);
 
-    //     return $request;
-    // }
+        return $request;
+    }
 }

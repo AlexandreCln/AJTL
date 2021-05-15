@@ -13,8 +13,8 @@
             }) }}
         </div>
         <div class="col-sm-3">
-            {% if form.vars.data.pictureFilename %}
-                <img src="{{ uploaded_asset(form.vars.data.pictureFilename)|imagine_filter('squared_thumbnail_small') }}" height="100">
+            {% if form.vars.data.id %}
+                <img src="{{ uploaded_asset(form.vars.data.pictureFilename) }}" height="100">
             {% endif %}
         </div>
     </div>

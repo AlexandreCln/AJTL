@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import placeholderPath from 'Images/user_placeholder.jpg';
+import placeholderPath from 'Images/avatar_placeholder.jpg';
 
 export default {
   props: { photoSrc: { type: String, default: placeholderPath } }

@@ -10,7 +10,7 @@
         <hr class="mt-2 mb-5">
 
         <div class="mb-4">Membres de l'association</div>
-        {% for person in presentationPersons %}
+        {% for person in presentation.presentationPersons %}
             <div class="my-3 d-flex align-items-center">
                 <img class="mr-2 rounded" src="{{ uploaded_asset(person.pictureFilename)|imagine_filter('squared_thumbnail_extra_small') }}" alt="">
                 <span class="mr-3">{{ person.name }}</span>
