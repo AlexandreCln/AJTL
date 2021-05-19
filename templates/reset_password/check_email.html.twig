@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Email changement mot de passe{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('card_form_theme') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="pt-4 container">
+        <div class="wrap shadow">
+            <div class="header-title">
+            <span class="title mb-5 text">
+                C'est parti !
+            </span>
+                <div class="text-check-email background">
+                    <p>
+                        Un email vous à été envoyé contenant le lien pour changer de mot de passe, celui-ci
+                        expirera dans 1 heure.
+                    </p>
+                    <p>
+                        Si vous ne recevez pas ce message, regardez vos spams et vérifier que l'adresse de votre
+                        demande est exacte.
+                    </p>
+                    <div class="text-center">
+                        <a class="text-primary btn btn-secondary" href="{{ path('app_forgot_password_request') }}">
+                            Réessayez
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
