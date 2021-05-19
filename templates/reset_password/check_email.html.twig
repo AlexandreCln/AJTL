@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Email changement mot de passe{% endblock %}
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('card_form_theme') }}
@@ -16,13 +16,18 @@
             </span>
                 <div class="text-check-email background">
                     <p>
-                        An email has been sent that contains a link that you can click to reset your password.
-                        This link will expire
-                        in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}
-                        .
+                        Un email vous à été envoyé contenant le lien pour changer de mot de passe, celui-ci
+                        expirera dans 1 heure.
                     </p>
-                    <p>If you don't receive an email please check your spam folder or <a
-                                href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+                    <p>
+                        Si vous ne recevez pas ce message, regardez vos spams et vérifier que l'adresse de votre
+                        demande est exacte.
+                    </p>
+                    <div class="text-center">
+                        <a class="text-primary btn btn-secondary" href="{{ path('app_forgot_password_request') }}">
+                            Réessayez
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

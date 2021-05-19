@@ -7,34 +7,31 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="pt-4 container">
         <div class="wrap shadow">
             <div class="header-title">
-            <span class="title">
-                Changez de mot de passe !
-            </span>
-                {% for flashError in app.flashes('danger') %}
-                    <div class="alert alert-error" role="alert">{{ flashError }}</div>
-                {% endfor %}
+                <span class="title">
+                    Changez de mot de passe !
+                </span>
             </div>
 
             {% form_theme registrationForm 'form_themes/card_form_theme.html.twig' %}
 
-            {{ form_start(registrationForm) }}
-                {{ form_widget(registrationForm) }} {# A shortcut for calling form_row() on each field #}
+            <div class="m-3">
+                {{ form_start(registrationForm) }}
+                    {{ form_widget(registrationForm) }} {# A shortcut for calling form_row() on each field #}
+                    <div>
+                        <small>
+                            Veuillez entrer votre adresse email et nous vous enverrons un lien pour modifier
+                            votre mot de passe.
+                        </small>
+                    </div>
 
-            <div>
-                <small>
-                    Veuillez entrer votre adresse email et nous vous enverrons un lien pour modifier
-                    votre mot de passe.
-                </small>
+                    <div class="mt-4 container-form-btn">
+                        <button type="submit" class="form-btn">Envoyer la demande</button>
+                    </div>
+                {{ form_end(registrationForm) }}
             </div>
-
-            <div class="mt-4 container-form-btn">
-                <button type="submit" class="form-btn">Envoyer la demande de changement</button>
-            </div>
-            {{ form_end(registrationForm) }}
         </div>
     </div>
 {% endblock %}
