@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block title 'Changer le mot de passe' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('card_form_theme') }}
+{% endblock %}
+
+{% block body %}
+    <div class="pt-4 container">
+        <div class="wrap shadow">
+            <div class="header-title">
+            <span class="title">
+                Changez de mot de passe !
+            </span>
+            </div>
+
+            {% form_theme registrationForm 'form_themes/card_form_theme.html.twig' %}
+
+            {{ form_start(registrationForm) }}
+                {{ form_widget(registrationForm) }}
+
+            <div class="mt-4 container-form-btn">
+                <button type="submit" class="form-btn">Modifier</button>
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}
