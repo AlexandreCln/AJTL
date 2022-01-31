@@ -15,16 +15,18 @@
 
 #### Installation
 
-run ```composer install```
-
 Creates a **.env.local** file based on the *.env*, then configure the *DATABASE_URL* variable.
 
-run ```php bin/console doctrine:database:create```
+Then executes the following commands :
 
-run ```php bin/console doctrine:schema:update --force```
+```composer install```
 
-run ```php bin/console doctrine:migrations:migrate```
+```php bin/console doctrine:database:create```
 
-run ```yarn install```
+```php bin/console doctrine:schema:update --force```
 
-run ```yarn dev```
+```php bin/console doctrine:migrations:migrate```
+
+```yarn install```
+
+```yarn dev```
