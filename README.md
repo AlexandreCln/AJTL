@@ -17,9 +17,7 @@
 
 run ```composer install```
 
-Creates a *.env.local from* *.env* file.
-
-Configure the *DATABASE_URL* environment variable.
+Creates a **.env.local** file based on the *.env*, then configure the *DATABASE_URL* variable.
 
 run ```php bin/console doctrine:database:create```
 
