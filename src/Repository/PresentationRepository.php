@@ -19,8 +19,14 @@ class PresentationRepository extends ServiceEntityRepository
         parent::__construct($registry, Presentation::class);
     }
 
-    public function findUniqueRow(): ?Presentation
+    public function getOrCreateUniqueRow(): Presentation
     {
-        return $this->findOneBy([]);
+        $presentation = $this->findOneBy([]);
+
+        if (!$presentation) {
+            $presentation = new Presentation;
+        }
+        
+        return $presentation;
     }
 }

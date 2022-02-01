@@ -23,7 +23,7 @@ class PresentationController extends AbstractController
     public function index(PresentationRepository $presentationnRepo)
     {
         return $this->render('presentation/index.html.twig', [
-            'presentation' => $presentationnRepo->findUniqueRow(),
+            'presentation' => $presentationnRepo->getOrCreateUniqueRow(),
         ]);
     }
 
